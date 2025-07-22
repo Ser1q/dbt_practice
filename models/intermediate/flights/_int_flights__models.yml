@@ -1,0 +1,32 @@
+models:
+  - name: fct_booking
+    description: Booking facts
+    docs:
+      show: true
+      node_color: red 
+    latest_version: 1
+    versions:
+      - v: 1
+    config:
+      contract: {enforced: true}
+
+    meta:
+      owner: "serik.nuradil@gmail.com"
+      contact_tg: nar9k
+      status: captain
+
+    columns: 
+      - name: book_ref
+        data_type: bpchar(6)
+        constraints:
+          - type: not_null
+      - name: book_date
+        data_type: timestamptz
+      - name: total_amount
+        data_type: numeric(10, 2)
+        constraints:
+          - type: check
+            expression: "total_amount > 0"
+        tests: 
+          - not_null
+        quote: true
