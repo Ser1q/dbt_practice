@@ -9,6 +9,7 @@ models:
       - v: 1
     config:
       contract: {enforced: true}
+      on_schema_change: append_new_columns
 
     meta:
       owner: "serik.nuradil@gmail.com"
