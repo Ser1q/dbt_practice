@@ -18,7 +18,7 @@ models:
 
     columns: 
       - name: book_ref
-        data_type: bpchar(6)
+        data_type: varchar(8)
         constraints:
           - type: not_null
       - name: book_date
@@ -45,8 +45,6 @@ models:
     columns:
       - name: ticket_no
         data_type: bpchar(13)
-        constraints:
-          - type: unique
       - name: flight_id
         data_type: int4
         constraints: 

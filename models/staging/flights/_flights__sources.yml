@@ -58,11 +58,7 @@ sources:
           - name: book_ref
           - name: book_date
           - name: total_amount
-        freshness: 
-          warn_after: {count: 6, period: hour}
-          error_after: {count: 1, period: day}
-            
-          filter: current_timestamp::date - book_date::date < 3
+  
         loaded_at_field: book_date::timestamp
       - name: seats
         description: Seats

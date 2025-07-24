@@ -4,10 +4,7 @@
     incremental_strategy = 'merge',
     unique_key = ['book_ref'],
     tags = ['bookings'],
-    incremental_predicates = [
-      "DBT_INTERNAL_DEST.session_start > dateadd(day, -7, current_date)"
-    ],
-    on_schema_change = 'fail'
+    on_schema_change = 'sync_all_columns'
     )
 }}
 SELECT

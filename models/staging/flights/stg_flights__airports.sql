@@ -3,12 +3,12 @@
     materialized = 'table',
   )
 }}
-select
+SELECT
   airport_code,
   airport_name,
   city,
   coordinates,
   timezone
-from {{ source('demo_src', 'airports') }}
+FROM {{ source('demo_src', 'airports') }}
 
     
