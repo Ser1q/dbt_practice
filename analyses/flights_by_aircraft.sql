@@ -19,3 +19,6 @@ SELECT
     {%- endfor %}
 FROM
     {{ ref('fct_flights') }}
+{% if target.name == 'dev'%}
+LIMIT 100000
+{% endif %}
