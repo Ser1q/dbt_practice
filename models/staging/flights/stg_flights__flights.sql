@@ -1,13 +1,23 @@
 {{
   config(
-    materialized = 'incremental',
-    incremental_strategy = 'merge',
-    unique_key = ['flight_id']
+    materialized = 'table',
+    post_hook = '
+      {% set backup_relation = api.Relation.create(
+        database = this.database,
+        schema = this.schema,
+        identifier = this.identifier ~ "_dbt_backup_new",
+        type = "table"
+      )%}
+
+      {% do adapter.drop_relation(backup_relation)%}
+
+      {% do adapter.rename_relation(this, backup_relation)%}
+    '
     )
 }}
 SELECT
   flight_id,
-  flight_no,
+  flight_no::varchar(10) as flight_no,
   scheduled_departure,
   scheduled_arrival,
   departure_airport,
@@ -15,7 +25,8 @@ SELECT
   "status",
   aircraft_code,
   actual_departure,
-  actual_arrival
+  actual_arrival,
+  'Halo there' as something_new
 
 FROM {{ source('demo_src', 'flights') }}
 {% if is_incremental() %}
